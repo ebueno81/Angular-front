@@ -1,11 +1,16 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, Routes } from '@angular/router';
 import { HomeComponent } from "./component/home/home.component";
+import { ProductListComponent } from "./component/product-list/product-list.component";
+
+const routes: Routes = [
+  {path:'',component:HomeComponent}
+];
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HomeComponent],
+  imports: [RouterOutlet, HomeComponent, ProductListComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
