@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Product } from '../../common/product';
 import { ProductService } from '../../services/product.service';
 
+
 @Component({
   selector: 'app-home',
   standalone: true,
