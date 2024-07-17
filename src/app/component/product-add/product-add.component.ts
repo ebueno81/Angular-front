@@ -3,6 +3,7 @@ import { ProductService } from '../../services/product.service';
 import { HeaderAdminComponent } from "../header-admin/header-admin.component";
 import { FormsModule } from '@angular/forms'; // Importar FormsModule
 import { ActivatedRoute, Route, Router } from '@angular/router';
+import { not } from 'rxjs/internal/util/not';
 
 @Component({
   selector: 'app-product-add',
@@ -20,6 +21,7 @@ export class ProductAddComponent implements OnInit {
   urlImage : string ='';
   userId : string ='1';
   categoryId: string = '1'; 
+  selectedFile!: File;
 
 constructor(private productService : ProductService, private router:Router, private activateRoute:ActivatedRoute){
 
@@ -29,7 +31,13 @@ constructor(private productService : ProductService, private router:Router, priv
     this.getProductById();
   }
 
+  
   addProduct(){
+    let producto = {
+      id: this.id,
+      code: '0001',
+      name:this.name,
+   }
     const formData = new FormData();
     formData.append('id',this.id.toString());
     formData.append('code','0001');
@@ -39,6 +47,7 @@ constructor(private productService : ProductService, private router:Router, priv
     formData.append('urlImage',this.urlImage);
     formData.append('userId',this.userId);
     formData.append('categoryId',this.categoryId);
+    formData.append('image',this.selectedFile);
     console.log(formData);
 
     this.productService.createProduct(formData).subscribe(
@@ -73,4 +82,7 @@ constructor(private productService : ProductService, private router:Router, priv
       );
   }
 
+  onFileSelect(event:any){
+    this.selectedFile = event.target.files[0];
+  }
 }
