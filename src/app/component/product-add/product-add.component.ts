@@ -13,6 +13,7 @@ import { not } from 'rxjs/internal/util/not';
   styleUrl: './product-add.component.css'
 })
 export class ProductAddComponent implements OnInit {
+  
   id : number =0;
   code : string='0001';
   name : string='';

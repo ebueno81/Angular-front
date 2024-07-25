@@ -3,6 +3,7 @@ import { RouterOutlet, Routes } from '@angular/router';
 import { HomeComponent } from "./component/home/home.component";
 import { ProductListComponent } from "./component/product-list/product-list.component";
 import { ProductAddComponent } from "./component/product-add/product-add.component";
+import { CategoryListComponent } from './component/category-list/category-list.component';
 
 const routes: Routes = [
   {path:'',component:HomeComponent}
@@ -11,7 +12,7 @@ const routes: Routes = [
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HomeComponent, ProductListComponent, ProductAddComponent],
+  imports: [RouterOutlet, HomeComponent, ProductListComponent, ProductAddComponent, CategoryListComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
