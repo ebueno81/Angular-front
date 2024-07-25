@@ -4,6 +4,7 @@ import { HeaderAdminComponent } from "../header-admin/header-admin.component";
 import { FormsModule } from '@angular/forms'; // Importar FormsModule
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { not } from 'rxjs/internal/util/not';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-product-add',
@@ -24,7 +25,7 @@ export class ProductAddComponent implements OnInit {
   categoryId: string = '1'; 
   selectedFile!: File;
 
-constructor(private productService : ProductService, private router:Router, private activateRoute:ActivatedRoute){
+constructor(private productService : ProductService, private router:Router, private activateRoute:ActivatedRoute, private toastr: ToastrService){
 
 }
 
@@ -54,6 +55,12 @@ constructor(private productService : ProductService, private router:Router, priv
     this.productService.createProduct(formData).subscribe(
       data => {
         console.log(data);
+        if(this.id==0){
+          this.toastr.success('Product register success','Products');
+        }else{
+          this.toastr.success('Product update success','Products');
+        }
+        
         this.router.navigate(['admin/product']);
       }
     );

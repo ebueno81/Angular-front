@@ -5,6 +5,7 @@ import { ProductService } from '../../services/product.service';
 import { HeaderAdminComponent } from "../header-admin/header-admin.component";
 import { Router } from '@angular/router';
 import { RouterModule } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-product-list',
@@ -39,9 +40,29 @@ export class ProductListComponent implements OnInit{
   }
 
   deleteProductById(id:number){
-    this.productService.deleteProductById(id).subscribe(
-      ()=>this.listProducts()
-    );
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+      cancelButtonText:"Cancel"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.productService.deleteProductById(id).subscribe(
+          ()=>this.listProducts()
+        );
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success"
+        });
+      }
+    });
+
+    
   }
   
 }
