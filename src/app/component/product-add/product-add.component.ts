@@ -25,7 +25,8 @@ export class ProductAddComponent implements OnInit {
   categoryId: string = '1'; 
   selectedFile!: File;
 
-constructor(private productService : ProductService, private router:Router, private activateRoute:ActivatedRoute, private toastr: ToastrService){
+constructor(private productService : ProductService, private router:Router, private activateRoute:ActivatedRoute, 
+  private toastr: ToastrService){
 
 }
 

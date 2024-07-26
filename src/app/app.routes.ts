@@ -11,7 +11,9 @@ export const routes: Routes = [
     {path:'admin/product/addproduct',component:ProductAddComponent},
     {path:'admin/product/update/:id',component:ProductAddComponent},
     {path:'admin/categoriaslist',component:CategoriasListComponent},
-    {path:'admin/category',component:CategoriasComponent},
+    {path:'admin/category/addcategory',component:CategoriasComponent},
+    {path:'admin/category/update/:id',component:CategoriasComponent},
+    
     
     
     
