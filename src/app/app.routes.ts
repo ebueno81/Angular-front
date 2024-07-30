@@ -4,6 +4,7 @@ import { ProductListComponent } from './component/product-list/product-list.comp
 import { ProductAddComponent } from './component/product-add/product-add.component';
 import { CategoriasComponent } from './component/category/categorias/categorias.component';
 import { CategoriasListComponent } from './component/category/categorias-list/categorias-list.component';
+import { DetailProductComponent } from './component/cart/detail-product/detail-product.component';
 
 export const routes: Routes = [
     {path:'',component:HomeComponent},
@@ -13,6 +14,7 @@ export const routes: Routes = [
     {path:'admin/categoriaslist',component:CategoriasListComponent},
     {path:'admin/category/addcategory',component:CategoriasComponent},
     {path:'admin/category/update/:id',component:CategoriasComponent},
+    {path:'cart/detailproduct/:id',component:DetailProductComponent},
     
     
     

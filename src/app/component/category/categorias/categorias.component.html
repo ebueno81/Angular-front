@@ -12,7 +12,7 @@
     </ol>
 
     <h2>Crear Categoría</h2>
-    <form class="form-horizontal" (ngSubmit)="addCategory()" enctype="multipart/form-data">
+    <form class="form-horizontal">
         <input type="hidden" [(ngModel)]="id" id="id" name="id">
         <div class="form-group">
             <label class="control-label col-sm-2" for="nombre">Nombre:</label>
@@ -25,7 +25,7 @@
         <br>
         <div class="row">
             <div class="col-sm-2">
-                <button class="btn btn-success">
+                <button class="btn btn-success"(click)="addCategory()">
                     <span class="glyphicon glyphicon-saved"></span> Guardar
                 </button>
             </div>

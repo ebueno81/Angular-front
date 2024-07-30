@@ -5,11 +5,14 @@ import { FormsModule } from '@angular/forms'; // Importar FormsModule
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { not } from 'rxjs/internal/util/not';
 import { ToastrService } from 'ngx-toastr';
+import { Category } from '../../common/category';
+import { CategoryService } from '../../services/category.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-product-add',
   standalone: true,
-  imports: [HeaderAdminComponent, FormsModule],
+  imports: [CommonModule, HeaderAdminComponent, FormsModule],
   templateUrl: './product-add.component.html',
   styleUrl: './product-add.component.css'
 })
@@ -24,14 +27,17 @@ export class ProductAddComponent implements OnInit {
   userId : string ='1';
   categoryId: string = '1'; 
   selectedFile!: File;
+  categories : Category[] = [];
 
-constructor(private productService : ProductService, private router:Router, private activateRoute:ActivatedRoute, 
+constructor(private productService : ProductService, private categoryService: CategoryService, private router:Router, private activateRoute:ActivatedRoute, 
   private toastr: ToastrService){
 
 }
 
   ngOnInit(): void {
+    this.getCategories();
     this.getProductById();
+
   }
 
   
@@ -93,5 +99,11 @@ constructor(private productService : ProductService, private router:Router, priv
 
   onFileSelect(event:any){
     this.selectedFile = event.target.files[0];
+  }
+
+  getCategories(){
+    return this.categoryService.getListCategory().subscribe(
+      data=>this.categories = data
+    );
   }
 }

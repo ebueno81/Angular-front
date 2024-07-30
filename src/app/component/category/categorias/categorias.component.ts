@@ -4,6 +4,7 @@ import { CategoryService } from '../../../services/category.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { FormsModule } from '@angular/forms';
+import { Category } from '../../../common/category';
 
 @Component({
   selector: 'app-categorias',
@@ -21,7 +22,7 @@ export class CategoriasComponent implements OnInit{
 
   }
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    this.getCategoryById();
   }
 
   getCategoryById(){
@@ -35,27 +36,23 @@ export class CategoriasComponent implements OnInit{
               this.name=data.name;
             }  
           );
-        }
+        } 
       }
     );
   }
   addCategory(){
-   let category = {
-    id: this.id,
-    name: this.name
-   }   
-   const formData = new FormData();
-   formData.append('id',this.id.toString());
-   formData.append('name',this.name);
-   this.categoryService.createCategory(formData).subscribe(
-    data =>{
+   let categories = new Category(this.id, this.name);
+    
+   
+   this.categoryService.createCategory(categories).subscribe(
+    res =>{
       if(this.id==0){
         this.toastr.success('Category register success','Category');
       }else{
         this.toastr.success('Category update success','Category');
       }
 
-      this.router.navigate(['admin/category']);
+      this.router.navigate(['admin/categoriaslist']);
     }
    );
   }
