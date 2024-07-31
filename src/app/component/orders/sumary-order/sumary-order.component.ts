@@ -10,6 +10,9 @@ import { OrderProduct } from '../../../common/order-product';
 import { Order } from '../../../common/order';
 import { OrderState } from '../../../common/order-state';
 import { OrderService } from '../../../services/order.service';
+import { PaymentService } from '../../../services/payment.service';
+import { DataPayment } from '../../../common/data-payment';
+import { SessionStorageService } from '../../../services/session-storage.service';
 
 @Component({
   selector: 'app-sumary-order',
@@ -28,7 +31,9 @@ export class SumaryOrderComponent implements OnInit {
   address : string='';
   orderProducts: OrderProduct[]=[];
   userId:number=1;
-  constructor(private cartService: CartService, private userService: UserService, private orderService: OrderService){
+  constructor(private cartService: CartService, private userService: UserService, private orderService: OrderService,
+    private paymentService:PaymentService, private sessionStorage:SessionStorageService
+  ){
 
   }
 
@@ -51,6 +56,21 @@ export class SumaryOrderComponent implements OnInit {
     this.orderService.createOrder(order).subscribe(
       data => {
         console.log('order created with id: ' + data.id);
+        this.sessionStorage.setItem('order',data);
+      }
+    );
+
+
+    //redict payment with paypal
+    let urlPayment;
+    let dataPayment = new DataPayment('PAYPAL', this.totalCart.toString(),'USD','COMPRA');
+
+    console.log('Data Payment:', dataPayment);
+    this.paymentService.getUrlPayPalment(dataPayment).subscribe(
+      data => {
+        urlPayment = data.url;
+        console.log('Successful response...');
+        window.location.href=urlPayment;
       }
     );
 
