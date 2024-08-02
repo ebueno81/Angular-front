@@ -8,6 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Category } from '../../common/category';
 import { CategoryService } from '../../services/category.service';
 import { CommonModule } from '@angular/common';
+import { SessionStorageService } from '../../services/session-storage.service';
 
 @Component({
   selector: 'app-product-add',
@@ -27,17 +28,19 @@ export class ProductAddComponent implements OnInit {
   userId : string ='1';
   categoryId: string = '1'; 
   selectedFile!: File;
+  user:number=0;
   categories : Category[] = [];
 
 constructor(private productService : ProductService, private categoryService: CategoryService, private router:Router, private activateRoute:ActivatedRoute, 
-  private toastr: ToastrService){
+  private toastr: ToastrService, private sessionStorage : SessionStorageService){
 
 }
 
   ngOnInit(): void {
     this.getCategories();
     this.getProductById();
-
+    this.user=this.sessionStorage.getItem('token').id;
+    this.userId=this.user.toString();
   }
 
   

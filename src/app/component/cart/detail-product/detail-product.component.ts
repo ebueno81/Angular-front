@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { HeaderUserComponent } from "../../header-user/header-user.component";
 import { ItemCart } from '../../../common/item-cart';
 import { ToastrService } from 'ngx-toastr';
+import { HomeService } from '../../../services/home.service';
 
 
 @Component({
@@ -32,7 +33,7 @@ export class DetailProductComponent implements OnInit {
   quantity: number = 0;
 
   constructor(
-    private productService: ProductService,
+    private homeService: HomeService,
     private activatedRoute: ActivatedRoute,
     private cartService: CartService,
     private toastr: ToastrService
@@ -47,7 +48,7 @@ export class DetailProductComponent implements OnInit {
       p => {
         let id = p['id'];
         if (id) {
-          this.productService.getProductById(id).subscribe(
+          this.homeService.getProductById(id).subscribe(
             data => {
               this.id = data.id;
               this.name = data.name;

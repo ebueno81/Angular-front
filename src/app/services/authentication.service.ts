@@ -17,10 +17,10 @@ export class AuthenticationService {
    }
 
    registerUser(user:User): Observable<User>{
-      return this.httpClient.post<User>(this.apiUrl+'/register',User);
+      return this.httpClient.post<User>(this.apiUrl+'/register',user);
    }
 
    login(userDTO:Userdto):Observable<Jwtclient>{
-    return this.httpClient.post<Jwtclient>(this.apiUrl+"/",userDTO);
+    return this.httpClient.post<Jwtclient>(this.apiUrl+"/login",userDTO);
    }
 }
